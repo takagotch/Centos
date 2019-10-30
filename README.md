@@ -7,7 +7,7 @@ https://github.com/chef/bento
 
 ```sh
 // centos
-yum install epel-relase
+yum install epel-release
 
 ```
 
