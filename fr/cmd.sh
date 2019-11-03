@@ -1,32 +1,91 @@
 ## syslog   journald rsyslog
+systemctl status systemd-journald
+journalclt -b
+journalctl --since="2014-09-05 01:23:45" --until="2014-09-07 04:56:00"
+journalctl --since="2014-09-06 00:03:27" --until="2014-09-07 11:56:00" -u sshd.service
+journalctl --since-today
+journalctl -f
+journalctl -p warning
+journalctl -p err
+journalctl -p 0
+journalctl -p 1
+journalctl -p 2
+journalctl -p 3
+journalctl -p 4
+journalctl -p 5
+journalctl -p 6
+
+logger -p daemon.emerg "*** TEST LOG **"
+
+journalctl -p 9
+logger -p daemon.alert "*** ALERT TEST LOG ***."
+journalctl -p i
+
+journalctl -k
+journalctl _PID=10765
+
+journalctl /usr/sbin/crond
+df -HT | grep tmpfs
+
+cp /etc/systemd/journald.conf /etc/systemd/journald.conf.org
+vi /etc/systemd/journald.conf
+
+systemctl restart systemd-journald
+cd /var/log/journal/xxxx/
+ls -l
+cat /etc/machines-id
+
+vi /etc/systemd/journald.conf
+systemctl restart systemd-journald
+journalctl --disk-usage
+
+vi /etc/rsyslog.conf
+
+touch /var/log/journalctl_log_172.16.70.2
+firewall-cmd-zone=public --add-port=514/udp --permanent
+firewall-cmd --reload
+firewall-cmd --list-all
+
+systemctl restart rsyslog
+systemctl status rsyslog
+
+firewall-cmd --zone=public --add-port=514/udp --permanent
+firewall-cmd --reload
+
+systemctl start sysemd-journald
+systemctl status systemd-journald
+journalctl -o short -f | nc -uv 172.16.70.99 514
 
 
+mkdir -p /var/log/journal/'cat /etc/machine-id'
+journalctl --setup-keys --force
 
+journalctl --verify-key ee2e0e-045220-a3cec8-f111f8/17ec78-35a4e900
 
+yum install -y sos
 
+sosreport -a --report
 
-
-
-
-
-
-
-
-
-cd 
-ls -F mv sosreport-centos70n02-20141022103807 /var/www/html
+pwd
+tar sJvf /var/tmp/sosreport-centos70n02-201410221-3807.tar.xz -C
+ls -F
+cd sosreport-centos70n02-20141022103807/
+ls -F
+cd
+ls -F
+mv sosreport-centos70n02-20141022103807 /var/www/html/
 systemctl start httpd
-ifrewall-cmd --list-all
-firewall-cmd --zone=public -add-service-http --permanent
+firewall-cmd --list-all
+firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --reload
 
 cd /var/www/html/
-chomd 755 ./sosreport-centos70n02-20141022103807
+chmod 755 ./sosreport-centos70n02-20141022103807
 cd ./sosreport-centos70n02-20141022103807
-chomd -R 655 ./sos_commands
-chomd -R 655 ./sos_logs
-chomd -R 655 ./sos_reports
-
+chmod -R 655 ./sos_commands
+chmod -R 655 ./sos_logs
+chmod -R 655 ./sos_reports
+  
 
 
 ## NetworkManager
