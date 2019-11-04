@@ -324,6 +324,94 @@ nmcli device show
 ## docker KVM 6
 
 
+yum install -y qemu-kvm libvirt virt-manager virt-install
+
+systemctl start libvirtd
+virt-manager
+
+vi /root/ks.cfg
+
+ls /var/www/html/centos70/*.iso
+vi virt-install-centos7.sh
+
+sh /.virt-install-centos7.sh
+
+yum install livbirt-client
+
+virsh list -all
+virsh start centoscentos70vm02
+virsh shutdown centos70vm02
+virt-clone --original centos70vm01 --name centos70vm03 --file /var/lib/libvirt/images/centos70vm03.img
+virsh list --all
+ls -l /etc/libvirt/qemu/*.xml
+
+virsh console centos70vm02
+virsh list --all
+virsh snapshot-create-as centos0vm02 centos70vm02-snapshot-2014-09-19-001
+virsh snapshot-list centos70vm02
+virsh snapshot-create-as centos70vm02 centos70vm02-snapshot-2014-09-19-002
+virsh shapshot-list centos70vm02
+virsh snapshot-info centos70vm02 centosvm02-snapshot-2014-09-19-001
+virsh snapshot-info centos70vm02 centos70vm02-snapshot-2014-09-19-002
+virsh snapshot-revert centos70vm02 centosxxx-snapshot-2014-09-19-001
+virt-what
+virt-what
+systemd-detect-virt
+systemd-detect-virt
+
+
+yum install -y docker
+rpm -qa | grep docker
+vi /etc/sysconfig/docker
+systemctl start docker
+systemctl enable docker
+setenforce 0
+getenforce
+docker pull centos:centos5
+docker pull centos:centos6
+docker pull centos:centos7
+docker images
+
+docker run -name test01 -i -t centos:centos6 /bin/bash
+cat /etc/redhat-release
+hostname
+ifconfig eth0 | grep inet
+ping -c 3 172.16.1.1
+ip a show dev docker0
+touch /root/testfile
+ls /root/
+exit
+
+
+docker ps -a
+docker commit xxx centos:centos6
+docker images
+docker run --name test02 -i -t centos:centos5 /bin/bash
+ls /root/
+
+touch /root/testfile2
+exit
+docker ps -a
+docker commit xxx centos:testfile2
+docker images
+
+docker iamge
+docker run --name test001 -1 -t centos:centos6.6 /bin/bash
+docker ps -a
+cd /var/lib/docker/devicmapper/metadata
+cat xxx | python -mjson.tool
+
+ls -l /dev/mapper/
+dmsetup create testvol01 --table "0 $((10737418240 / 512)) thin /dev/mapper/docker-8:3-84171797/-pool 6"
+mount /dev/mapper/testvol01 /mnt
+ls -ls /mnt/rootfs/
+cat /mnt/rootfs/etc/redhat-release
+cd
+unmount /mnt
+dnmsetup remove /dev/mapper/testvol01
+mkdir /root/apache
+cd /root/apache
+vi Dockerfile
 
 pwd
 ls -l
