@@ -667,6 +667,92 @@ ls -l /etc/tuna
 
 ## 10 kickstart
 
+yum install -y https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+yum install -y nginx
+vi /etc/nginx/nginx.conf
+grep --extended-regexp -v "#|^$" /etc/nginx/nginx.conf
+
+systemctl restart nginx
+systemctl status nginx
+systemctl enable nginx
+
+firewall-cmd --get-active-zones
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --reload
+firewall-cmd --list-services
+
+cd /usr/share/nginx/html
+echo "Hello CentOS 7." > test.html
+curl http://172.16.3.82/test.html
+cd /usr/share/nginx/html
+mkdir -p centos70/dvd
+mount -o loop /root/CentOS-7.0-1406-x86_64-DVD.ison centos70/dvd
+
+openssl passwd -1
+vi /usr/share/nginx/html/centos70/ks.cfg
+version=RHEL7
+
+chomod 644 /usr/share/nginx/html/centos70/ks.cfg
+ls -lF /usr/share/nginx/html/centos70/
+
+yum install -y dhcp
+cp /usr/lib/systemd/system/dhcpd.service /etc/systemd/system/
+vi /etc/systemd/system/dhcpd.service
+vi /etc/dhcp/dhcpd.conf
+systemctl daemon-reload
+systemctl start dhspd
+systemctl status dhcpd
+systemctl enable dhcpd
+
+ps -ef | grep dhcp | grep -v grep
+
+firewall-cmd --permanent --zone=public --add-service=dhcp
+firewall-cmd --reload
+
+firewall-cmd --list --reload
+firewall-cmd --list-all
+
+yum install -y tftp-server
+vi /etc/xinetd.d/tftp
+yum install -y syslinux
+cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
+
+mkdir /var/lib/tftpboot/centos70
+cp /usr/share/nginx/html/centos70/dvd/images/pxeboot/vmlinuz /var/lib/tftpboot/centos70/
+cp /usr/share/nginx/html/centos70/dvd/images/pxebot/initrd.img /var/lib/tftp/boot/centos70/
+
+mkdir -p /var/lib/tftpboot/pxelinux.cfg
+vi /var/lib/tftpboot/pxelinux.cfg/default
+
+curl http://172.16.3.82/centos70/ks.cfg
+
+systemctl restart xinetd
+systemctl status xinetd
+systemctl enable xinetd
+
+firewall-cmd --permanent --zone=public --add-service=tftp
+firewall-cmd --reload
+firewall-cmd --list-all
+bi /etc/selinux/config
+reboot
+
+mkdir -p /root/dvd
+mkdir -p /root/ksiso
+mount -o loop /root/CentOS-7.O-1406-x86_64-DVD.ison/root/dvd
+cp -a /root/dvd/* /root/ksiso
+cd /root/ksiso
+
+ls -F
+mv isolinux/isolinux.cfg isonlinux/isolinux.cfg.org
+vi isolinux/isolinux.cfg
+
+vi /root/ksiso/ks.cfg
+
+yum install -y genisoimage
+pwd
+mkisofs -o /root/centos70ks.ison -b isolinux/isolinux.bin -c isolinux/boot.cat-no-emul-boot -V 'CentOS 7 x86_64' -boot-load-size 4 -boot-info-table -R -J -v -T ./
+ls -lh /root/centos70ks.iso
+
 ## 11 hadoop
 
 ## 12 ceph
