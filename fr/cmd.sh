@@ -325,10 +325,57 @@ nmcli device show
 
 
 
+pwd
+ls -l
+docker build -t cents7_apache .
+docker images
+docker run --name apache001 --privileged -i -t -d -p 80:80 centos7_apache /sbin/init
+docker ps -a
+nsenter -t $(docker inspect --format '{{.State.Pid}}' apache001) -i -m -n -p -u /bin/bash
+
+systemctl status httpd
+ip a | grep inet
+curl 172.17.0.26/index.html
 
 
 
+systemctl enable cgconfig
+systemctl start cgconfig
+lssubsys -am
+cgcreate -t tky:kty -g net_cls:/test01
+cgset -r net_cls.classid=x000100002 /test01
+cat /sys/fs/cgroup/net_cls/test01/net_cls.classid
+ip a
 
+tc qdisc add dev enp0s25 root handle 1: htb
+tc class add dev enp0s25 parent 1: classid 1:2 htb rate 256kbps
+tc filter add dev enp0s25 parent 1: protocol ip prio 10 handle 1: cgroup
+
+cd 
+dd if=/dev/zero of=/root/testfile bs=1024k count=30
+ls -lh testfile
+md5sum ./testfile
+vi /root/scp.sh
+chmod +x /root/scp.sh
+tc class change dev enp0s25 parent 1: classid 1:2 htb rate 100kps
+cgexec --sticky -g net_cls:test01 ./scp.sh
+tc class change dev enp0s25 parent 1: classid 1:2 htb rate 1mbps
+time cgexec --sticky -g net_cls:test01 ./scp.sh
+tc class change dev enp0s25 parent 1: classid 1:2 htb rate 10mbps
+
+cgcreate -t tky:tky -g blkio:/test01
+ls -l /sys/fs/cgroup/blkio/test01/
+ls -l /dev/sda
+cget -r blkio.throttle.read_iops_device="8:0 10" /test01
+vi /root/io.sh
+chmod +x /root/io.sh
+cgset -r blkio.throttle.read_iops_device="8:0 10" /test01
+cgexec --sticky -g blkio:test01 ./io.sh
+
+cget -r blkio.throttle.read_iops_device="8:0 50" /test01
+cgexec --sticky -g blkio:test01 ./io.sh
+cgset -r blkio.throttle.read_iops_device="8:0 500" /test01
+.io/.sh
 
 systemctl set-property httpd.service MemoryLimit=1G
 systemctl deamon-reload ; systemctl restart httpd.service
