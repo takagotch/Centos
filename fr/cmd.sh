@@ -1,3 +1,107 @@
+#### systemd, journald, firewald, tuned
+
+
+
+
+# 1804/Kernel3.10/systemd/firewald/NetworkManager/SELinux
+# BIND/unbound/Apache/Postfix/Dovecot/Samba/chrony/Docker
+# NetworkManager, systemd, firewalled, VirtualX
+# DNS, WWW external public server, DHCP, LDAP, NetworkServer managed control way
+
+## grub
+
+vi /etc/default/grub
+
+cp /boot/grub2/grub.cfg /boot/grub2/grub.cfg.org
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+grub-mkconfig -o /boot/grub2/grub.cfg
+grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
+
+reboot
+cat /proc/cmdline
+
+cd /etc/grub.d/
+cp 40_custom 40_custom.org
+chomd -x 40_custom.org
+
+grep -A 14 "CentOS Linux" /boot/grub2/grub.cfg
+vi 40_custom
+
+vi /etc/default/grub
+grub2-mkconfig -o /boot/grub2/grub.cfg
+awk -F\' '$i=="menuntry " {print $2}' /boot/grub/grub.cfg                 '
+reboot
+vi /etc/default/grub
+grub2-mkconfig -o /boot/grub2/grub.cfg && reboot
+
+
+## systemd
+systemctl get-default
+systemctl list-units --type=target --all --no-pager
+systemctl set-default graphical.target
+systemctl get-default
+reboot
+
+ls -l /lib/systemd/system/runlevel*target
+systemctl isolate multi-user.target
+systemctl isolate graphical.target
+runlevel
+systemctl get-default
+systemctl isolate rescue.target
+
+systemctl -t service list-unit-files
+systemctl -r service list-unit-files | grep -i ftp
+systemctl status vsftpd
+systemctl start vsftpd
+systemctl status vsftpd
+
+systemctl stop vsftpd
+systemctl status vsftpd
+systemctl enable vsftpd
+systemctl -t service is-enalbed vsftpd
+
+cd /usr/lib/systemcd/system
+cat graphical.target
+pwd
+cat multi-user.target
+cat basic.target
+cat sysinit.target
+pwd
+cat sshd.service
+pwd
+grep Before=network.target ./*.service
+pwd 
+cat auditd.service
+systemctl show --all httpd
+mkdir /etc/systemcd/system/httpd.service.d/
+cd /etc/systemd/system/httpd.service.d/
+vi 10-httpd.conf
+
+systemctl daemon-reload
+
+localetl
+
+localetl set-locale LANG=ja_JP.utf8
+localetl
+cat /etc/locale.conf
+
+localctl list-keymaps
+localetl set-keymap jp106
+cat /etc/vconsole.conf
+
+timedatectl
+timedatectl set-time 2014-09-06
+timeatectl
+
+timedatectl set-time 19:51:00
+timedatectl
+
+timedatectl set-time "2019-09-06 19:55:00"
+timedatectl
+timedatectl list-timezones
+timedatectl set-timezone Asia/Tokyo
+
 ## syslog   journald rsyslog
 systemctl status systemd-journald
 journalclt -b
@@ -217,6 +321,220 @@ vi ifcfg-eth0
 reboot
 nmcli device show
 
+## docker KVM 6
+
+
+
+
+
+
+
+
+systemctl set-property httpd.service MemoryLimit=1G
+systemctl deamon-reload ; systemctl restart httpd.service
+cat /etc/systemd/system/httpd.service.d/90-MemoryLimit.conf
+
+
+## OpenLMI 7
+yum install -y openlmi
+systemctl start tog-pegasus
+systemctl enable tog-pegasus
+
+firewall-cmd --permanent --add-port=5989/tcp
+firewall-cmd --reload
+setenforce 0
+
+cat /etc/Pegasus/access.conf | grep -v ^
+passwd pegasus
+yum install -y http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release
+yum install -y openlmi-scripts*
+cp /etc/Pegasus/server.pem /etc/pki/ca-trust/source/anchors/managed-machine-cert.pem
+update-ca-trust extract
+lmi -h localhost hwinfo
+lmi -h localhost system
+
+lmi -h localhost storage list
+
+lsscsi
+lmi storage raid create --name myraid001 5 sdb sdc sdd
+lmi storage vg create myvg001 myraid001
+lmi storage lv create myvg001 myvol001 400G
+ls -l /dev/mapper/myvg001-myvol001
+
+lmi storage fs create xfs myvol001
+mkdir /myvol001
+lmi storage mount create /dev/mapper/myvg001-myvol001 /myvol001/
+
+lmi storage raid show
+
+lmi -h localhost net device list
+lmi -h localhost sw install httpd
+
+lmi -h localhost sw show pkg httpd
+lmi service show nginx
+
+lmi service start nginx
+lmi service show nginx
+
+## 8 firewald iptables
+systemctl start firewalld
+systemctl enable firewalld
+firewall-cmd --list-all-zones
+firewall-cmd --state
+firewall-cmd --get-zones
+firewall-cmd --get-active-zones
+
+yum install -y nfs-utils
+systemctl start nfs-server
+systemctl status nfs-server
+vi /etc/exports
+systemctl reload nfs-server
+exportfs -av
+showmount -e localhost
+systemctl eneble nfs-server
+
+firewall-cmd --permanent --zone=public --add-service=nfs
+
+firewall-cmd --reload
+firewall-cmd --zone=public --list-services
+firewall-cmd --list-all
+cat /etc/firewald/zones/public.xml
+mount -t nfs 172.16.70.1:/home/ /mnt/
+df -HT | grep nfs
+
+firewall-cmd --permanent --zone=public --remove=service=nfs
+firewall-cmd --reload
+
+vi /etc/sysctl.conf
+sysctl -p
+
+cat /proc/sys/net/ipv4/ip_forward
+firewall-cmd --get-active-zones
+firewall-cmd --permanent --zone=trusted --change-interface=ens7
+firewall-cmd --get-active-zones
+firewall-cmd --permanent --zone public --add-masquerede
+firewall-cmd --reload
+
+firewall-cmd --list-all --zone=public
+firewall-cmd --list-all --zone=trusted
+
+cd /etc/firewalld/zones/
+cat public.xml
+cat trusted.xml
+
+vi /etc/grub.d/40_custom
+grub2-mkconfig -o /boot/grub2/grub2.cfg
+reboot
+vi /etc/grub.d/40_custom
+grub2-mkconfig -o /boot/grub2/grub2.cfg
+reboot
+
+cat /etc/grub.d/40_custom
+grep ^CLASS= /etc/grub.d/10_linux
+cp /etc/grub.d/10_linux /root/10_linux.org
+vi /etc/grub.d/10_linux
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+reboot
+
+cat /etc/grub.d/40_custom
+
+cp /etc/grub.d/40_custom /root/40_custom.org
+grub2-mkpasswd-pbkdf2
+vi /etc/grub.d/40_custom
+grub2-mkconfig -o /boot/grub2/grub.cfg
+reboot
+
+yum install -y system-storage-manager
+ssm list
+
+ssm create --fatype xfs -p pool1001 -e /dev/sda4 /mnt
+ssm list
+df -HT
+
+echo "Hello encrypted LVM" > /mnt/testfile
+unmount /mnt
+cryptsetup luksClose /dev/mapper/encrypted001
+
+ssm list volumes
+cryptsetup luksOpen /dev/mapper/pool1001-lvo001 encrypted001
+ssm list volumes
+mount /dev/maper/encrypted001 /mnt
+
+## 9 tuned
+grep -v "^# /etc/tuned/tuned-main.conf"
+tybed-adm list
+
+systemctl start tuned
+tuned-adm profile powersave
+tuned-adm active
+cd /usr/lib/tuned
+ls -F
+cd /usr/lib/tuned/latency-performance
+cat ./tuned.conf | grep -v "^#" | grep -v "^$"
+
+mkdir -p /etc/tuned/myhadoop001
+vi /etc/tuned/myhadoop001/tuned.conf
+tuned-adm profile myhadoop001
+tuned-adm profiles:
+tail -f /var/log/tuned/tuned.log
+
+vi /etc/sysctl.conf
+sysctl -p
+cat /proc/sys/vm/nr_hugepages
+
+vi /etc/sysctl.conf
+sysctl -p
+cat /proc/sys/vm/drop_caches
+vi /etc/sysctl.conf
+sysctl -p
+cat /proc/sys/vm/swappiness
+cat /sys/block/sda/queue/scheduler
+echo cfq > /sys/block/sda/queue/scheduler
+cat /sys/blocksda/queue/scheduler
+
+echo noop > /sys/block/sda/queue/scheduler
+cat /sys/block/sda/queue/scheduler
+
+cat /proc/sys/kernel/numa_balancing
+vi /etc/sysctl.conf
+sysctl -p
+cat /proc/sys/kernel/numa_balancing
+
+numactl -H
+lscpu
+cat /proc/cpuinfo | grep processor | wc -l
+less /etc/libvirt/qemu/centos70vm01.xml
+virsh edit centos70vm01
+virsh start centos70vm01
+virsh vcpinfo centos70vm01
+
+yum install -y tuna
+tuna -Q
+numactl --hardware
+tune -S 1 -q 'eht*' -x
+tuna -Q | grep eth
+
+tuna -c 12 -t rsyslogd -m
+tuna -t rsyslogd -P
+grep Cpus_allowed_list /proc/'pgrep rsyslogd' /status
+tuna -c 0-23 -t rsyslogd -m 
+tuna -t rsyslogd -P
+grep Cpus_allowed_list /proc/'pgrep rsyslogd'/status
+
+tuna -S O -t rsyslogd -m
+grep Cpus_allowed_list /proc/'pgrep rsyslogd'/status
+
+tuna -g
+ls -l /etc/tuna
+
+
+
+## 10 kickstart
+
+## 11 hadoop
+
+## 12 ceph
 
 
 
