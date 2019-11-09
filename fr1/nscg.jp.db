@@ -1,0 +1,52 @@
+host
+host.
+
+// /var/named/nscg.jp.db
+$TTL 172800
+@ IN SOA nsl.necg.jp. root.nsl.nscg.jp. (
+         2015011701
+	 3600
+	 300
+	 360000
+	 86400
+	 )
+  IN     NS nsl.nscg.jp.
+  IN     NS ns2.nscg.jp.
+  IN     MX 10 snake.nscg.jp.
+  IN     MX 20 serpent.nscg.jp.
+ns1      IN A     192.168.7.2
+         IN AAAA  2001:db8::2
+ns2      IN A     192.168.7.3
+         IN AAAA  2001:db8::3
+pc1      IN AAAA  2001:db8::101
+         IN A     192.168.7.5
+snake    IN A     192.168.7.5
+         IN AAAA  2001:db8::5
+serpent  IN A     192.168.7.6
+         IN AAAA  2001:db8::6
+anaconda IN A     192.168.7.10
+         IN AAAA  2001:db8:10
+mx1      IN CHAME snake
+mx2      IN CHAME serpent
+www      IN CHAME anaconda
+
+// /var/named/nscg.jp.db
+nscg.jp IN SOA ns1.nscg.jp. root.nsl.nscg.jp. (
+	       2012011401 ; serial
+	       3600 ; refresh (1 hour)
+	       300 ; retry (5 minutes)
+	       3600 ; expire (4 days 4 hours)
+	       86400 ; minimum (1 day)
+               )
+	NS ns1.nscg.jp
+	NS ns2.nscg.jp.
+	MX 10 mx1.nscg.jp.
+	MX 20 mx2.nacg.jp.
+nscg.jp IN DNSKEY 256 3 8 xxx/xxx
+/+f xxx +c/xxx
+xxx/xxx/xxx xxx
+xxxxxxx
+
+
+
+

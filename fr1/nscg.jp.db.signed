@@ -1,0 +1,15 @@
+; File written on Sat Jan 17 21:06:08 2015
+; dnssec_signzone version 9.9.4-RedHat-9.9.4-14.e17
+nscg.jp. 172800 IN SOA ns1.nscg.jp. root.ns1.nscg.jp. (
+                       201511705 ; serial
+		       3600 ; refresh (1 hour)
+		       300 ; retry (5 minutes)
+		       360000 ; expire (4 daus 4 hours)
+		       86400 ; minimum (1 day)
+		       )
+	 172800 RRSIG SOA 8 2 172800 (
+	              20150216110608 20150117110608 62148 nscg.jp.
+		      xxxx
+		      xxxx	 )
+
+

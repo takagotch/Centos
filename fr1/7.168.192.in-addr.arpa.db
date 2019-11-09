@@ -1,0 +1,20 @@
+$TTL 172800
+@ IN SOA ns1.nscg.jp. root.ns1.nscg.jp. (
+	     2015011701
+	     3600
+	     300
+	     360000
+	     86400
+             )
+    IN NS ns1.necg.jp.
+    IN NS ns2.nscg.jp.
+    IN PTR necg.jp.
+    IN A 255.255.255.0
+2   IN PTR ns1.nscg.jp.
+3   IN PTR ns2.necg.jp.
+5   IN PTR snake.nscg.jp.
+6   IN PTR serpent.nscg.jp.
+10  IN PTR anaconda.nscg.jp.
+101 IN PTR pc1.nscg.jp.
+
+

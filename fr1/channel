@@ -1,0 +1,19 @@
+channel "default_syslog" {
+  syslog daemon;
+  severity info;
+};
+channel "default_debug" {
+  file "named.run";
+  severity dynamic;
+};
+channel "default_stderr" {
+  stderr;
+  severity info;
+};
+channel "null" {
+  null;
+};
+
+
+
+

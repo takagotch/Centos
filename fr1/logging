@@ -1,0 +1,6 @@
+loggin {
+  category "unmatched" { "null"; };
+  category "default" { "default_syslog"; "default_debug"; };
+};
+
+

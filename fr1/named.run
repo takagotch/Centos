@@ -1,0 +1,16 @@
+// var/named/data/named.run
+
+client 192.168.7.3#37436: transfer of 'necg.jp/IN': AXFR-style IXFR started: TSIQ master-slave
+client 192.168.7.3.3#37436: transfer of 'necg.jp/IN': AXFR-style IXFR ended
+
+//
+zone ndvh.jp/IN: Transfer started.
+transfer of 'nscg.jp/IN' from 192.168.7.2#53: connected using 192.168.7.3#53911
+zone nscg.jp/IN: transferred serial 2016011701: TSIG 'master-slave'
+transfer of 'nscg.jp/IN' from 192.168.7.2#53: Transfer completed: 1 message, 20
+record, 579 bytes, 0.002 secs (289500 bytes/sec)
+zone nscg.jp/IN: sending notifies (serial 2015011701)
+
+
+
+

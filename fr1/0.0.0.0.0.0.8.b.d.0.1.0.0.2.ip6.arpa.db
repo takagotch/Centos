@@ -1,0 +1,20 @@
+// /var/named/0.0.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.db
+$TTL 172800
+@           IN SOA ns1.nscg.jp. root.ns1.necg.jp. (
+				 2011120101
+				 3600
+				 300
+				 360000
+				 86400
+                                 )
+	    IN NS ns1.nscg.jp.
+	    IN NS ns2.necg.jp.
+	    IN PTR necg.jp.
+2.0.0.0.0   IN PTR ns1.nscg.jp.
+3.0.0.0.0   IN PTR ns2.nscg.jp.
+5.0.0.0.0   IN PTR snake.nscg.jp.
+6.0.0.0.0   IN PTR serpent.nscg.jp.
+0.1.0.0.0   IN PTR anaconda. nscg.jp.
+1.0.1.0.0   IN PTR pc.nscg.jp.
+
+
