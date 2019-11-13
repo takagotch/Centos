@@ -1,0 +1,15 @@
+dn: olcDatabase={1}hdb,cn=config
+changetype: modify
+add: olcSyncRepl
+olcSyncRepl: rid=001
+  provider=ldap://ldapi.nscg.jp:389/
+  bindmethod=simple
+  binddn="cn=Admin,dc=nscg,dc=jp"
+  credentials=admin
+  type=refreshAndPersist
+  interval=00:05:00
+  searchbase="dc=nscg,dc=jp"
+  filter=(|(objectClass=organization)(objectClass=organizationalRole)(objectClass=organizationaltionalUnit (objectClass=posixAccount)(objectClass=person)))
+  scop=sub
+  retyr="60 10 300 3"
+

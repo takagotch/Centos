@@ -1,0 +1,10 @@
+dn: olcDatabase={0}.config,cn=conifg
+changetype: modify
+add: olcRootDN
+olcRootDN: cn=admin,cn=config
+-
+add: olcRootPW
+olcRootPW: {SSHA}xxx
+-
+
+

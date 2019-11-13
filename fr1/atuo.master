@@ -1,0 +1,6 @@
+/mic /etc/auto.mic
+/~ /etc/auto.direct
+/net -hosts
++auto.master
+
+

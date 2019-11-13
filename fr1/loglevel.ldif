@@ -1,0 +1,7 @@
+dn: cn=config
+changetpe: modify
+add: olcLogLevel
+olcLogLevel: filter config ACL stats
+
+
+

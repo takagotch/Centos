@@ -1,0 +1,12 @@
+// /etc/sysconfig/slapd
+SLAPD_URLS="ldapi:/// ldap:///"
+
+// /etc/sysconfig/slapd
+#SLAPD_URLS="ldpi:/// ldap:///"
+SLAPD_URLS="ldapi:/// ldap:///"
+
+// etc/sysconfig/slapd
+SLAPD_OPTIONS="-l local4 -s 512"
+
+
+

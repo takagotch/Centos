@@ -1,0 +1,8 @@
+dn: uid=user02.ou=People,dc=nscg,dc=jp
+changetype: modify
+replace: gecos
+gcos: Sample User 02
+
+
+
+

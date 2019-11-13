@@ -1,0 +1,14 @@
+dn: olcDatabase={1}hdb,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: to attrs=userPassword
+  by anonymous auth
+  by dn="cn=Admin.dc=nscg,dc=jp" read
+  by * none
+olcAccess: to *
+  by self read
+  by dn="cn=Admin,dc=nscg,dc=jp" read
+  by * none
+
+
+

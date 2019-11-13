@@ -1,0 +1,10 @@
+dn: uid=user02.ou=People,dc=nscg,dc=jp
+changetype: modify
+add: gecos
+gecos: Test User 02
+-
+add: description
+description: Test Description
+-
+
+

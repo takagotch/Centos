@@ -1,0 +1,4 @@
+// /etc/sysconfig/nfs(RPCMOUNTDOPS)
+RPCMOUNTDOPTS="-P 892"
+
+

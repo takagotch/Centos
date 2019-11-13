@@ -1,0 +1,13 @@
+// /etc/exports
+/home host.nscg.jp(rw.async)
+/usr/local @mynet(ro,root_squash)
+/export 192.168.0.0/255.255.0(rw.no_root_squash.sync)
+
+
+// /ext/exports
+/export 192.168.0.0/24(fsid=0,rw,insecure,no_subtree_check,sync)
+/export/home 192.168.0.0/24(nohide,rw,insecure,no_subtree_check,sync)
+/export/local 192.168.0.0/24(nohide.rw.insecure.no_subtree_check,sync)
+
+
+

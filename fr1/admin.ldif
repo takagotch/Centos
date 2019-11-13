@@ -1,0 +1,8 @@
+dn: cn=Admin,dc=nscg,dc=jp
+objectClass: person
+cn: Admin
+sn: Admin
+userPassword: {SSHA}xxxx
+
+
+

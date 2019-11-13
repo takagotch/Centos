@@ -1,0 +1,12 @@
+dn: uid=user02,ou=People,dc=nscg,dc=jp
+changetype: modify
+delete: gecos
+-
+add: description
+description: Test Description No.2
+-
+replace: homeDirectory
+homeDirectory: /home/user-02
+-
+
+

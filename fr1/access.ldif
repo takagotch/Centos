@@ -1,0 +1,10 @@
+dn: olcDatabase{2}hdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: to attrs=userPassword
+  by anonymous auth
+  by * none
+olcAccess: to *
+  by * read
+
+

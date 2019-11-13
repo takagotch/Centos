@@ -1,0 +1,3 @@
+nfssv:/export /nfs nsf4 proto=tcp,sec=krb5,hard,intr
+
+

@@ -121,7 +121,115 @@ ldapadd -x -D "cn=Manager,dc=nscg,dc=jp" -W -f user.ldif
 
 ldapdelete -x -D "cn=Manager,dc=nesc,dc=jp" -W "uid=user03,ou=People,dc=nscg,dc=jp"
 
+ldapmodify -x -D "cn=Manager,dc=nscg,dc=jp" -W -f modify01.ldif
 
+ldapsearch -x -LLL "dc=nscg,dc=jp" "(uid=user02)" gecos description
+
+ldapmodify -x -D "cn=Manager,dc=nscg,dc=jp" -W -f modify02.ldif
+ldapsearch -x -LLL -b "dc=nscg,dc=jp" "(uid=user02)" descriptions
+ldapmodify -x -D "cn=Manager,dc=nscg,dc=jp" -W -f modify03.ldif
+
+ldapsearch -x -LLL -b "dc=nscg,dc=jp" "(uid=user02)" gecos
+
+ldapmodify -x -D "cn=Manager,dc=nscg,dc=jp" -W -f modify04.ldif
+ldapsearch -x -LLL "dc=nscg,dc=jp" "(uid=user02)" gecos description homeDirectory
+
+ldapmodify -Y EXTERNAL -H ldapi:/// -f config-rootdn.ldif
+ldapsearch -x -LLL -D 'cn=admin,cn=config' -b 'cn=config' cn=config-W
+
+ldapmodify -Y EXTERNAL -H ldap1:/// -f config-tls.ldif
+ldapsearch -x -LLL 'cn=config' -D 'cn=admin,cn=config' cn=config -W -Z
+
+ldapsearch -x -LLL -b 'cn=config' -D 'cn=admin,cn=config' cn=config -W -Z
+
+ldapsearch -x -LLL -b 'cn=config' -D 'ch=admin,cn=config' cn=config -W -H ldap://centos7.nscg.jp
+
+authconfig --update --enabledap --enabledapauth
+
+mkdir /home/user01
+su - user01
+
+authconfig --config --enalbessd --enablessdauth
+
+mkdir /home/user01
+su - user01
+
+ldapmodify -Y EXTERNAL -H ldapi:/// -f access.ldif
+ldapsearch -x -LLL "dc=nscg,dc=jp" "(uid=user01)"
+ldapsearch -x -LLL "dc=nscg, dc=jp" "(uid=user01)"
+
+ldapadd -x -D "cn=Manager,dc=nscg,dc=jp" -W -f admin.ldif
+ldapsearch -x -LLL -b "dc=nscg,dc=jp" "{uid=user01}" userPassword
+ldapsearch -x -LLL -b "dc=nscg,dc=jp" -D "cn=Admin,dc=nscg,dc=jp" -W "(uid=user01)" userPassword
+
+ldapmodify -x -D cn=admin,cn=config -f loglevel.ldif -W
+
+ldapsearch -LLL -Y EXTERNAL -H ldapi:/// -b "cn=schema,cn=config" "(objectClass=olcSchemaConfig)" dn
+
+mkdir /tmp/work
+mkdir /tmp/work/slapd.d
+
+cd /tmp/work
+slaptest -f autofs.config -F ./slapd.d
+slaptest -f autofs.config -F ./slapd.d
+ls slapd.d/cn=config/cn=schema/
+cp slapd.d/cn=config/cn=schema/cn=\{1\}autofs.ldif authfs.ldif
+
+ldapadd -Y EXTERNAL -H ldapi:/// -f syncprov-module.ldif
+
+ldapadd -Y EXTERNAL -H ldapi:/// -f syncprov.ldif
+
+ldapsearch -LLL -Y EXTERNAL -H ldapi:/// -b "olcDatabase={2}hdb,cn=config" olcDbIndex
+
+ldapmodify -Y EXTERNAL -H ldapi:/// -f index.ldif
+
+cd /var/lib/ldap
+db_stat -m
+
+cd /var/lib/ldap
+db_stat -t
+
+firewall-cmd --permanent --add-service=nfs
+firewall-cmd --reload
+
+mkdir /export/home
+mkdir /export/local
+mount --bind /home /export/home
+mount --bind /usr/local /export/local
+
+mkdir /nfs
+mount -t nfe4 nfssv:/ /nfs
+ls /nfs
+df
+
+exportfs -av
+exportfs -v
+
+sbowmount -e
+exportfs -u 192.168.0.0/24:/export
+exportfs -v
+
+showmount
+showmount -d
+
+shouwmount -a
+
+mount -t nfs -o nfsvers=3 nfssv:/export/home /nfs/home
+mount -t nfs4 nfssv:/ /nfs
+unmount /nfs/home
+
+systemctl list-units --type=mount
+
+cd /nfs/home/
+ls -l
+
+cd kawamura
+touch memo.txt
+ls -l memo.txt
+nfs4_getfactl memo.txt
+
+nfs4_setfacl -a A::OWNER@:x memo.txt
+nfs4_getfacl_memo.txt
 
 
 
