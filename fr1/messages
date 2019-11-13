@@ -1,0 +1,10 @@
+// /var/log/messages
+Jan 17 12:15:25 centos7g unbound: [4936:0] notice: init module 0: validator
+Jan 17 12:15:26 centos7g unbound: [4936:0] notice: init module 1: iterator
+Jan 17 12:15:26 centos7g unbound: [4936:0] info: start of service (unbound 1.4.20).
+
+// var/log/messages
+
+
+
+

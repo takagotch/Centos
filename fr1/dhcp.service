@@ -1,0 +1,7 @@
+// /etc/systemd/system/dhcpd.service
+[Service]
+ExecStart=/usr/sbin/dhcpd -f -cf /etc/dhcp/dhcpd.conf -user dhcpd -group dhcpd
+--no-pid enp0s8
+
+
+

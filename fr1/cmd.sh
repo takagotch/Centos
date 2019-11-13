@@ -62,4 +62,40 @@ update delete new.nscg.jp. IN A
 
 
 
+unbound-checkconf
+unbound-control reload
+
+firewall-cmd --permanent --add-service=dns
+firewall-cmd --reload
+
+
+host www.google.com. 192.168.7.3
+
+firewall-cmd --permanent --add-service-dhcp
+firewall-cmd --reload
+
+cp /usr/lib/systemd/system/shcpd.service /etc/systemd/system/
+
+systemctl --system daemon-reload
+
+dhcpd -t -cf /etc/dhcp/dhcpd.conf
+dhcp -t -cf /etc/dchp/dhcpd.conf
+
+firewall-cmd --permanet --add=service=dhcpv6
+firewall-cmd --reload
+
+cp /usr/lib/systemd/system/dhcp6.service /etc/systemd/system/
+systemctl --system daemon-reload
+
+dhcpd -6 -t -cf /etc/dhcp/dhcp6.conf
+
+cp /usr/lib/systemd/system/dhcrelay.service /etc/systemd/system/
+
+systemctl --system daemon-reload
+
+cp /usr/lib/systemd/system/shcrelay.service /etc/systemd/system/dhcrelay6.service
+
+
+
+
 
