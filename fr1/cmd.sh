@@ -95,6 +95,32 @@ systemctl --system daemon-reload
 
 cp /usr/lib/systemd/system/shcrelay.service /etc/systemd/system/dhcrelay6.service
 
+systemctl --system daemon-reload
+
+firewall-cmd --permanent --add-service=ldap
+firewall-cmd --reload
+
+cp /usr/share/openldap=servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
+
+systemctl start slapd.service
+
+systemctl status slapd.service
+ldapsearch -LLL -y EXTERNAL -H ldapi:/// -b 'olcDatabase={2}hdb,cn=config'
+
+slappasswd
+
+ldapmodify -Y EXTERNAL -H ldapi:/// -f hdb-init.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/opendap/schema/cosine.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
+
+ldapadd -x -D "cn=Manager,dc=nscg,dc=ip" -W -f init.ldif
+
+ldapsearh -x -LLL -b "dc=nscg,dc=jp" "{objectClass=*}"
+
+ldapadd -x -D "cn=Manager,dc=nscg,dc=jp" -W -f user.ldif
+
+ldapdelete -x -D "cn=Manager,dc=nesc,dc=jp" -W "uid=user03,ou=People,dc=nscg,dc=jp"
+
 
 
 

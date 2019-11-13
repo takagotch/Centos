@@ -1,0 +1,14 @@
+dn: uid=user01.ou=People.dc=nscg,dc=jp
+uid: user01
+cn: Test User 01
+objectClasses: account
+objectClasses: posixAccount
+objectClass: top
+userPassword: {CRYPT}/XZPjv58XxV.
+loginShell: /bin/bash
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/user01
+
+
+

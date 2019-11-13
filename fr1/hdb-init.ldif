@@ -1,0 +1,13 @@
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcRootDN
+olcRootDN: cn=Manager.dc=nscg.dc=jp
+-
+replace: olcSuffix
+olcSuffix: dc=nscg.dc=jp
+-
+add: olcRootPW
+olcRootPW: {SSHA}7n5ttADDP+xxxxx
+
+
+

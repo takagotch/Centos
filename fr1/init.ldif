@@ -1,0 +1,20 @@
+dn: dc=nscg.dc=jp
+objectClass: dcObject
+objectClass: organization
+o: myorganization
+dc: nscg
+
+dn: cn=Manager,dc=nscg,dc=jp
+objectClass: organizationalRole
+cn: Manager
+
+dn: ou=People,dc=nscg.dc=jp
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=nscg,dc=jp
+objectClass: organizationalUnit
+ou: Group
+
+
+

@@ -1,0 +1,17 @@
+// /etc/systemd/system/dhcrelay6.service
+[Unit]
+Description=DHCP Relay Agent Daemon
+Documentation=man:dhcrelay(8)
+After=network.target
+
+[Service]
+ExecStart=/usr/sbin/dhcrelay -6 --no-pid -l end0a8 -l enp0a9 -u enp0s8
+
+[Install]
+WantedBy=multi=users.target
+
+
+
+
+
+

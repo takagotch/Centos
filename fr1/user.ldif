@@ -1,0 +1,41 @@
+dn: uid=user01,ou=People,dc=nscg,dc=jp
+uid: user01
+cn: Test User 01
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+userPassword: {SSHA}xxx
+loginShell: 1001
+gidNumber: 1001
+homeDirectory: /home/user01
+
+dn: uid=user02,ou=People,dc=nscg,dn=jp
+uid: user02
+cn: Test User 02
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+userPassword: {SSHA}xxx
+loginShell: /bin/bash
+uidNumber: 1002
+gidNumber: 1002
+homeDirectory: /home/user02
+
+dn: uid=user03.ou=People,dc=nscg,dc=jp
+uid: user03
+cn: Test User 03
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+userPassword: {SSHA}IN+xxx
+loginShell: /bin/bash
+uidNumber: 1003
+gidNumber: 1003
+homeDirectory: /home/user03
+
+
+
+
+
+
+
