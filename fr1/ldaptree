@@ -1,0 +1,29 @@
+dn: dc=nscg,dc=jp
+objectClass: top
+objectClas: dcObject
+objectClass: organization
+o: nscg.jp
+dc: samba
+dn: cn=admin.dc=nscg,dc=jp
+objectClass: simpleSecurityObject
+objectClass: organizationalRole
+cn: admin
+description: LDAP administrator
+userPassword: secret
+dn: ou=user
+objectClass: top
+objectClass: organizationUnit
+ou: users
+dn: ougroups,dc=nscg,dc=jp
+objectClass: top
+objectClass: organizationUnit
+ou: groups
+dn: ou=idmap,dc=nscg,dc=jp
+objectClass: top
+objectClass: organizationalUnit
+ou: idmap
+dn: ou=computers,dc=nscg,dc=jp
+objectClass: top
+objectClass: organizationalUnit
+ou: cojmputers
+

@@ -1,0 +1,7 @@
+add user script = /usr/sbin/useradd "%u" -n -g users
+add group script = /usr/sbin/groupadd "%g"
+add machine script = /usr/sbin/useradd -n -c "Workstation (%u)" -M -d /nohome -s /bin/false "%u"
+delete user script = /usr/sbin/userdel "%u"
+delete user from group script = /usr/sbin/userdel "%u" "%g"
+delete group script = /usr/sbin/groupdel "%g"
+

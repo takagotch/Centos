@@ -1,0 +1,2 @@
+home -rw.intr.nolock nfsv:/home
+local -ro.hard.intr,nolock nfssv:/local

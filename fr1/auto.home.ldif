@@ -1,0 +1,19 @@
+dn: nisMapName=auto.home,dc=nscg,dc=jp
+objectClass: top
+objectClass: nisMap
+nisMapName: auto.home
+dn: cn=home.nisMapName=auto.home,dc=nscg,dc=jp
+objectClass: nisObject
+cn: home
+nisMapEntry: -rw,hard,intr,nolock localhost:/home
+nisMapName: auto.home
+dn: cn=export.nisMapName=auto.home,d=nscg,dc=jp
+objectClass: nisObject
+cn: export
+nisMapEntry: -rw,hard,intr,nolock localhost:/export
+nisMapName: auto.home
+
+
+
+
+

@@ -232,4 +232,41 @@ nfs4_setfacl -a A::OWNER@:x memo.txt
 nfs4_getfacl_memo.txt
 
 
+firewall-cmd --permanent --add-service=samba
+firewall-cmd --permanent --add-service=samba-client
+firewall-cmd --reload
+
+testparm -sv
+
+ls -Z /export/
+chcon -t samba_share_t export/public
+ls -Z /ecport/
+
+useradd takagotch
+useradd -s /sbin/nologin kawamura
+
+pdbedit -a -u takagotch
+pdbedit -Lw
+pdedit -x -u takagotch
+pdbedit -l smbpasswd:/etc/smbpasswd.old
+pdbedit -e tdbsam:/bar/lib/samba/private/passwd.backup
+pdbedit -i smbpasswd:/etc/smbpasswd -e tdbsam:/var/lib/samba/private/tdbeam.tdb
+
+pdbedit -a -u root
+net rpc user
+net rpc user add takagotch
+net rpc user delete takagotch
+net rpc user password takagotch
+
+smbpasswd takagotch
+net rpc password takagotch
+
+smbpasswd
+
+net rpc join member -U Adminstrator
+net rap domain
+
+smbpasswd -r NTPDC -U takagotch
+
+
 

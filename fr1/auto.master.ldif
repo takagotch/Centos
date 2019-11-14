@@ -1,0 +1,12 @@
+dn: nisMapName=auto.master,dc=nscg,dc=jp
+objectClass: top
+objectClass: nisMap
+nisMapName: auto.master
+dn: cn/nfs.nisMapName=auto.master,dc=nscg,dc=jp
+objectClass: nisObject
+cn: /nfs
+nisMapEntry: auto.home
+nisMapName: auto.master
+
+
+
