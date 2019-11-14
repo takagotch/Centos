@@ -1,0 +1,6 @@
+// /etc/auto.smb
+public -fstype=cifs.username=smbguest.guest.rw //anaconda//public
+homes -fstype=cifs.username=takagotch%Password.uid=takagotch.gid=1000.dir_mode=0750
+//anaconda/homes
+
+

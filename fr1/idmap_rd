@@ -1,0 +1,6 @@
+idmap config COBRA : backend = rid
+idmap config COBRA : ldap_base_dn = ou=idmap,dc=anaconda,dc=jp
+idmap config CORRA : ldap_url = ldap://localhost/
+idmap config COBRA : range = 10000 - 50000
+
+

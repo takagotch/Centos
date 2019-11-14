@@ -1,0 +1,8 @@
+[2015/02/07 17:35:18, 0] ../source3/smbd/server.c:1196(main)
+  smbd version 4.1.1 started.
+  Copyright Andrew Tridgell and the Samba Team 1902-2013
+[2015/02/07 17:35:18:376134, 0] ../source3/smbd/server.c:1278(main)
+  standard input is not a socket, assuming -D option
+[2015/02/07 17:35:19.46922, 0] ../lib/util/become_daemon.c:136(damon_ready)
+
+

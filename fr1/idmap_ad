@@ -1,0 +1,5 @@
+idmap config COBRA : backend = ad
+idmap config COBRA : range = 10000 - 50000
+idmap config COBRA : schema_mode = rfc2307 sfu
+
+

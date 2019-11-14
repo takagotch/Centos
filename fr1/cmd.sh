@@ -268,5 +268,51 @@ net rap domain
 
 smbpasswd -r NTPDC -U takagotch
 
+cp /usr/bin/smbclient /var/lib/samba/scripts/
+ls -ldZ /var/lib/samba/scripts/smbclient
+
+groupadd smbshare
+mkdir /opt/samba/usersshares
+chgrp smbshare /opt/samba/usershares
+chmod 1770 /opt/samba/usershares
+
+net usershare add project /opt/samba/usershares
+net usershare delete project
+net usershare list wildcard-sharename
+net usershare info wildcard-sharename
+
+setsebool samba_enable_home_dirs on
+
+testparm /etc/samba/smb.conf
+
+testparm /etc/samba/smb.conf cobra 192.168.0.49
+sudo smbstatus
+sudo smbcontrol smbd debug 10
+smbclient -L 192.168.0.4
+smbclient -U takagotch //anaconda/homes
+
+mkdir -p /smb/public
+mount -t cifs //anaconda/public /smb/public -o user=smbguest.guest.rw
+umount /smb/public
+
+firewall-cmd ==permanent --add-rich-rule='rule family=ipv4 source address="192.168.0.0./16" service name=ntp accept'
+firewall-cmd --reload
+
+chronyc sources
+
+chronyc -h 192.168.7.2 sources
+
+firewall-cmd --permanent --add-port=3128/tcp
+firewall-cmd --reload
+
+squidclient http://www.google.co.jp/
+
+setsebool -P squid_use_tproxy on
+
+firewall-cmd --permanent --zone=internal --add-port=3128/tcp
+firewall-cmd --permanent --direct --add-rule ipv4 nat PREROUTING O -i enp0s8 -p tcp
+firewall-cmd --reload
+
+
 
 

@@ -1,0 +1,5 @@
+// /etc/auto.master
+/smb /etc/auto.smb --timeout=60
+
+
+

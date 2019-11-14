@@ -1,0 +1,5 @@
+preexec = /usr/bin/embclient -U %h -M %m </etc/samba/smb.message &
+preexec close = no
+postexec = /bin/umnount /dev/scd0
+
+
