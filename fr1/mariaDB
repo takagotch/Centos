@@ -1,0 +1,6 @@
+Catalog {
+  Name = myCatalog
+  dbdriver = "dbi:mysql"; dbaddress = 192.168.7.3; dbport = 3306
+  dbname = "bacula"; dbuser = "bacula"; dbpassword = "bacula"
+}
+

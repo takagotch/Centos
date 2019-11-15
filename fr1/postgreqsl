@@ -1,0 +1,8 @@
+Catalog {
+  Name = MyCatalog
+  dbdriver = "dbi:postgresql"; dbaddress = 192.168.7.3; dbport = 5432;
+  dbname = "bacula"; dbuser = "bacula"; dbpassword = "bacula"
+}
+
+
+

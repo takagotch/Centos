@@ -551,6 +551,230 @@ LANG=ja_JP.encJP mrtg /etc/mrtg/mrtg.cfg
 
 indexmaker /etc/mrtg/mrtg.cfg > /var/www/mrtg/index.html
 
+firewall-cmd --permanent --add-service=amanda-client
+firewall-cmd --reload
 
+passwd amandabackup
+chown amandabackup /etc/amanda
+
+cp /usr/systemd/system/amanda.socket /etc/systemd/system/amanda-server.socket
+cp /usr/lib/systemd/system/amanda@.service /etc/systemd/system/amanda-server@.service
+
+systemctl --system daemon-reload
+
+firewall-cmd --permanent --add=service=amanda-client
+firewall-cmd -reload
+
+chown amandabackup /etc/amanda
+
+su amandabackup
+mkdir /var/lib/amanda/vtapes/sample
+restorecon /var/lib/amanda/vtapes/sample
+
+su amandabackup
+amserverconfig sample --template harddisk --mailto admin --dumpcycle 1week --runspercycle 7 --tapecycle 7 --runtapes 1 --tapedev /var/lib/amanda/vtapes/sample/
+
+su amandabackup
+amandaclient --config sample --client centos7g --diskdev /home --dumptype user-star -m
+
+su amandabackup
+amacheck weekly
+
+
+su amandabackup
+amdump sample
+
+amrecover sample
+listdisk
+
+setdisk /home
+ls
+cd admin
+ls
+
+add comps.xml.org
+add Maildir
+list
+delete comps.xml.org
+lcd /tmp
+extract
+y
+y
+quit
+
+su amandabackup
+amtape sample show
+amtape sample slot 1
+su amandabackup
+amrestore file:/var/lib/amanda/sample/tape 192.168.7.3 etc
+
+su amandahackup
+amrestore -p file:/var/lib/amanda/sample/tap 192.168.7.3 192.168.7.3 etc | tar xf -
+
+su amandabackup
+amtapetype -f /dev/nat0
+
+firewall-cmd --permanent --add-service=bacula-client
+firewall-cmd --reload
+
+firewall-cmd --permanent --add-service=bacula
+firewall-cmd --reload
+
+firewall-cmd --permanent --add-service=bacula
+firewall-cmd --reload
+
+alternatives --set libbaccats.so /usr/lib64/libbaccats-mysql.so
+
+mysql -u root -p
+CREATE DATABASE bacula;
+grant all privileges on bacula.* to bacula@192.168.3.202;
+set password for bacula@192.168.3.202=password('bacula');
+
+/usr/libexec/bacula/make_mysql_tables -u bacula -h 192.168.7.3 -p
+
+alternatives --set libbaccats.so /usr/lib64/libbaccats-postgresql.so
+
+systemctl reload postgresql.service
+
+su - postgres
+psql
+CREATE DATABASE bacula ENCODING 'SQL_ASCII' LC_COLLATE 'C' LC-CTYPE 'C' TEMPLATE template0;
+ALTER DATABASE bacula SET DATESTYLE to 'ISO, YMD';
+q
+
+/usr/libexec/bacula/make_bacula_tables -U postgres -h 192.168.7.3
+
+/usr/libexec/bacula/grant_postgresql_privileges -U posgres -h 192.168.7.3
+psql -U postgres -h 192.168.7.3
+alter user bacula with unencrypted password 'bacula';
+q
+
+systemctl reload postgresql.service
+
+chgrp bacula /etc/bacula/bat.conf
+chmod g+r /etc/bacula/bat.conf
+
+gpasswd -a admin bacula
+
+bconsole
+*q
+
+bconsole
+*status
+ALL
+*q
+
+bconsole
+label
+test
+1
+catalog-volume
+1
+q
+
+bconsole
+run
+1
+
+yes
+message
+
+
+virt-manager
+virt-install --name 'centos7-2' --ram1024 --disk=/var/lib/libvirt/images/cento7-2.img.size=8 --location=/var/lib/libirt/images/centos7.iso --extra-args='console-tty0 console=ttySo,115200n8'
+
+virsh list --all
+virsh start centos7-2
+virsh shutdown centos7-2
+virsh destroy centos7-2
+virsh vncdisplay centos6
+virsh save centos7 --file /var/lib/libvirt/qemu/save/save/centos7.img
+virsh restore /varlib/libvirt/qemu/save/centos7.img
+virsh setmem centos7 768M
+virsh setmaxmem centos7 1G
+virsh setvcpus centos7 2
+virsh setvcpus centos7 2 --config --maximum
+virsh-clone --original=centos7 --auto-clone
+
+docker search centos
+docker pull centos
+docker images
+docker run -it --name centos7 centos:7 /bin/bash
+exit
+docker attach centos7
+docker ps
+docker ps -a
+docker inspect centos7
+docker stop centos7
+docker start centos7
+docker restartcentos7
+docker commit -a NSCG -m "CentOS 7 test image" centos7 localrepo:test
+docker images localrepo
+docker images -t
+docker rm centos7
+docker rm -f centos7
+docker run -it --name webserver-devel --volume=/home/admin/html:/mnt centos:7 /bin/bash
+
+yum install install httpd
+vi /etc/httpd/conf/httpd.conf
+chcon -R system_u:object_r:docker_var_lib_t:s0 /home/admin/html
+cp -rp /mnt/* /var/www/html/
+restorecon -R /home/admin/html
+eixt
+docker commit -a NSCG -m "CentOS 7 webserver" werbserver-devel localrepo:webserver-1
+docker rm webserver-devel
+docker run -d --name webserver --expose=80 localrepo:webserver-1 /usr/sbin/httpd -D FOREGROUND
+docker inspect webserver | grep -i address
+docker rm -f webserver
+docker run -d --name webserver --expose=80 --publish 80:80 localrepo:webserver-1 / usr/sbin/httpd -D FOREGROUND
+
+echo "1" >/proc/sys/net/ipv4/ip_forward
+
+echo "1" > /proc/sys/net/ipv4/ip_forward
+
+firewall-cmd --set-default-zone internal
+firewall-cmd --get-default-zone
+
+firewall-cmd --permanent --zone=external --change-interface=enp0s5
+firewall-cmd --permanent --zone=external --list-all
+
+firewall-cmd --reload
+
+firewall-cmd --permanent --zone=external --add-forward-port="port=10080:proto=tcp: toaddr=192.168.100.8:toport=80"
+firewall-cmd --permanent --zone=external --list-all
+
+firewall-cmd --reload
+
+cd /etc/pki/tls/certs
+make localhost.crt
+
+JP
+Osaka
+osaka
+NSCG
+www.nscg.jp
+webmaster@nscg.jp
+
+mv /etc/pki/tls/certs/localhost.key /etc/pki/tls/private/
+
+mv localhost.key localhost.key.org
+openssl rsa -in localhost.key.org-out localhost.key
+
+cd /etc/pki/tls/certs/
+make server.csr
+
+mv /etc/pki/tls/cers/server.key /etc/pki/tls/private/
+
+openssl x509 -noout -text -in localhost.crt
+
+firewall-cmd --permanent --add-rich-rule='rule family=ipv4 service name=telnet source address=102.168.7.0/24 accept'
+firewall-cmd --permanent --add-rich-rule='rule family=ipv6 service name=telnet source address=2001:db8::/64 accept'
+firewall-cmd --reload
+
+firewall-cmd --permanet --add-service=rpc-bind
+firewall-cmd --reload
+
+firewall-cmd --permanent --add-serice=ttp
+firewall-cmd --reload
 
 

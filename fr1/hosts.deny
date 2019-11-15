@@ -1,0 +1,9 @@
+// /etc/hosts.deny
+bacula-fd: ALL
+
+bacula-sd: ALL
+
+baclua-dir: ALL
+
+
+

@@ -1,0 +1,4 @@
+ON_BOOT=start
+ON_SHUTDOWN=suspend
+
+

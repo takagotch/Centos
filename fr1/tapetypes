@@ -1,0 +1,11 @@
+// /etc/amanda/template.d/tapetypes
+define tapetype QIC-60 {
+  global
+  comment "Archive Viper"
+  length 60 mbytes
+  filemark 100 kbytes
+  speed 100 kbytes
+}
+
+
+
