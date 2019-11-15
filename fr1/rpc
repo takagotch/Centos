@@ -1,0 +1,4 @@
+// /etc/rpc
+mountd 100005 mount showmount
+
+

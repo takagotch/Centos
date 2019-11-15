@@ -1,0 +1,15 @@
+/etc/default/grub
+
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=""
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBTRIBUTOR="$(sed 's, release .*$,.g' /etc/system-release)"
+GRUB_DESABLE_SUBMENU=true
+#GRUB_TERMINAL_OUTPUT="console"
+GRUB_TERMINAL_OUTPUT="serial console"
+GRUB_TERMINAL_INPUT="serial console"
+GRUB_SERIAL_COMMAND="serial --unit=0 --speed=9600 --word=8 --parity=no --stop=1"
+GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=centos_centos7/centos7/swap rd.lvm.lv=centos_centos7/root/vconsole.font=latarcyheb-sun16 vconsole.keymap=us rhgb quiet console=ttySO,9600 console=tty0"
+GRUB_CMDLINE_LINUX="crashkernel=auto rd.lvm.lv=centos_centos7/swap rd.lvm.lv=centos_centos7/root vconsole.font=latarcyheb=sum16 vconsole.keymap=us rhgb quiet console=ttySO,9600 console=tty0"
+GRUB_DISABLE_RECOVERY="true"
+

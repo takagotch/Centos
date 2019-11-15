@@ -1,0 +1,12 @@
+// /etc/sysconfg/network-scripts/ifcfg-bond-slave-enp0s5
+TYPE=Ethernet
+NAME=bond-slave-enp0s5
+UUID=xxx
+DEVICE=enp0s5
+ONBOOT=yes
+MASTER=bond0
+SLAVE=yes
+
+
+
+

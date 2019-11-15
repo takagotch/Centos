@@ -1,0 +1,26 @@
+// /etc/systemd/system/vncserver@:<display>.service
+[Unit]
+Description=Remote desktip service (VNC)
+After=syslog.target.network.target
+
+[Service]
+Type=forking
+# Clean any existing files in /tmp/.X11-unix environment
+ExecStartPre=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>&1 || :'
+ExecStart=/sbin/runuser -l <USER> -c "/usr/vnserver %i"
+PIDFile=/home/<USER>/.vnc/%H%i.pid
+ExecStop=/bin/sh -c '/usr/bin/vncserver -kill %i > /dev/null 2>%1 || :'
+
+[Install]
+WantedBy=multi-user.target
+
+ExexStart=/sbin/runuser -l admin -c "/usr/vncserver %i"
+PIDFile=/home/admin/.vnc/%H%i.pid
+
+ExecStart=/sbin/runnser -l admin -c "/usr/bin/vncserver %i -geometory 1024x768"
+PIDFile=/home/admin/.vnc/%H%i.pid
+
+
+
+
+

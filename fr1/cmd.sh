@@ -313,6 +313,244 @@ firewall-cmd --permanent --zone=internal --add-port=3128/tcp
 firewall-cmd --permanent --direct --add-rule ipv4 nat PREROUTING O -i enp0s8 -p tcp
 firewall-cmd --reload
 
+squid -z
+
+firewall-cmd --permanent --add-service=postgresql
+firewall-cmd --reload
+
+su - postgres
+initdb -E utf8 -D /var/lib/pgsql/data
+
+su - postgres
+psql -h 192.168.7.3
+\l
+\q
+
+firewall-cmd --permanent --add-service=mysql
+firewall-cmd --reload
+
+mysqladmin -u root password 'admin'
+mysqladmin -p -u root -h localhost password 'admin'
+
+mysql -u root -p mysql
+CREATE USER testuser@centos7g.nscg.jp IDENTIFIED BY 'test';
+\q
+
+firewall-cmd --permanent --add-rich-rule='rule family=ipv4 port port=11211 protocol="tcp" source address="192.168.7.1" accept'
+firewall-cmd --reload
+
+telnet 127.0.0.1 11211
+set test 0 0 5
+abcde
+get test
+delete test
+quit
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+systemctl set-default multi-user.target
+
+cd /etc/systemd/system
+cp /usr/lib/system/system/vnserver@.service vnserver@:0.service
+
+systemctl daemon-reload
+
+firewall-cmd --permanent --add-service=vnc-server
+ifrewall-cmd --reload
+vncpasswd
+
+firewall-cmd --permanet -add-service=pmcd
+firewall-cmd --reload
+
+pminfo -h 192.168.7.3
+pminfo -t -h 192.168.7.3
+pminfo -t -h 192.168.7.3 swap
+pmval -h 192.168.7.3 -s 5 network.interface.total.bytes
+pmval -h 192.168.7.3 -s 5 -i enp0s3 network.interface.total bytes
+pmatop -h 192.168.7.3.5
+
+systemctl NetworkManager restart
+
+nmcli n off
+nmcli n c
+nmcli n on
+nmcli n on
+nmcli n c
+nmcli g ho
+nmcli g ho anaconda.nscg.jp
+hostname
+hostnamectl
+nmcli d
+nmcli --fields TYPE d
+
+nmcli d show enp0s5
+nmcli c
+nmcli c show enp0s5
+nmcli --field ipv4 c show enp0s5
+nmcli c a type ehternet con-name enp0s8 ifname enp0s8
+
+nmcli c m enp0s ipv4.method auto
+nmcli c m enp0s3 ipv4.addresses ""
+nmcli c m enp0s3 ipv4.dns "" ipv4.dns-search ""
+
+nmcli c m enp0s3 ipv4.method manual
+nmcli c m enp0s3 ipv4.addresses "192.168.108.3/24 192.168.108.2"
+nmcli c m enp0s3 ipv4.dns "192.168.108.1 192.168.108.2"
+nmcli c m enp0s3 ipv4.dns-search "nscg.jp"
+
+nmcli c m enp0s3 ipv4.routes "192.168.111.0/24 192.168.108.1"
+
+nmcli c m enp0s3 +ipv4.dns "192.168.108.3"
+nmcli c m enp0s3 -ipv4.dns 1
+nmcli c d enp0s3
+nmcli c u enp0s3
+
+nmcli c
+nmcli c
+nmcli c m bond0 ipv4.method manual ipv4.addresses "10.211.55.28/24 10.211.55.1"
+nmcli c m bond0 ipv4.dns "10.211.55.1" ipv4.dns-search ""
+
+nmcli c a type bond-slave autoconnect no iframe enp0s5 master bond0
+nmcli c a type bond-slave autoconnect no ifname enp0s6 master bond0
+nmcli c
+
+nmcli c m enp0s5 connection.autoconnect no
+nmcli c m bond-slave-enp0s5 connection.autoconnect yes
+nmcli c m bond-slave-enp0s6 connection.autoconnect yes
+systemctl restart network
+nmcli c
+
+ip addr show
+cat /proc/net/bonding/bond0
+
+
+ifenslave -c bond0 enp0s6
+cat /prc/net/bonding/bond0
+
+nmcli c
+nmcli c a type team con-name team0 iframe team0
+nmcli c
+
+nmcli c m team0 ipv4.method manual ipv4.addresses "10.211.55.26/24.10.211.55.1"
+nmcli c m team0 ipv4.dns "10.211.55.1 ipv4.dns-search"
+
+nmcli c a type team-slave autoconnect no iframe enp0s5 master team0
+nmcli c a type team-slave autoconnect no iframe enp0s6 master team0
+
+nmcli c
+
+nmcli c m enp0s5 connection.autoconnect no
+nmcli c m team-slave-enp0s5 connection.autoconnect yes
+nmcli c m enp0s6 connection.autoconnect no
+nmcli c m team-slave-enp0s6 connection.autoconnect yes
+sytemctl restart network
+nmcli c
+
+ip addr show
+teamdctl team0 state
+
+nmcli c a type bridge ifname br0
+nmcli c a type bridge-slave ifname enp0s5 master bridge-br0
+nmcli c m enp0s5 ipv4.addresses "" ipv4.dns "" ipv4.method disable
+
+ip link show
+
+ip -s link show
+ip link set down dev enp0s5
+ip address show
+ip address add local 10.211.55.10/8 brd 10.255.255 dev enp0s5
+ip address show dev enp0s5
+ip address delete local 10.211.55.10/8 brd 10.255.255.255 dev enp0s5
+ip address show dev enp0s5
+
+ip route show
+ip route add 10.211.59/24 via 10.211.55.1 dev enp0s5
+ip route show
+
+ip route get 10.211.59.4
+
+ip route delete 10.211.59/24
+ip route show
+
+ip neigh show
+
+ip neigh add to 10.211.55.2 dev enp0s5
+ip neigh show
+
+ss
+
+ss -a
+ss -ta
+
+ping -c 10 192.168.1.1
+traceroute router.nscg.jp
+tracepath router.nscg.jp
+rpcinfo -p
+ifconfig
+
+ifconfig enp0s5 down
+ifconfig enp0s5 up
+
+ifconfig enp0s5 inet 10.211.55.10 netmask 10.255.255.255
+
+netstat -t -u
+netstat -a -t -u | grep LISTEN
+
+route
+
+arp
+arp -s 10.211.55.1 00:lc:42:00:00:18
+arp -a
+
+arp -d 192.168.1.1
+arp -a
+
+hostname -v
+
+ls -l /lib/systemd/system/runlevel*.target
+systemctl list-unit-files
+systemctl list-unit-files -t service
+
+systemctl disable postfix.service
+systemctl enable postfix.service
+systemctl is-enabled postfix.service
+
+systemctl enable postfix
+
+systemctl mask postfix.service
+systemctl unmask postfix.service
+systemctl stop postfix.service
+systemctl start postfix.service
+systemctl restart postfix.service
+systemctl reload postfix.service
+systemctl is-active postfix.service
+systemctl status postfix.service
+
+systemctl list-units
+
+systemctl list-sockets
+systemctl list-dependencies
+
+firewall-cmd --permanent --add-port=514/top
+firewall-cmd --permanent --add-port=514/udp
+firewall-cmd --reload
+
+logwatch --output stdout
+logwatch --service postfix --output stdout
+
+snmpget -v1 localhost -c public system.sysName.()
+SNMPv2-MIB:sysName.O = STRING: centos7g
+
+sumpgetnext -v1 localhost -c public system.sysName
+snmpgetnext -v1 localhost -c public system.sysName.O
+
+snmpwalk -v1 localhost -c public ucdavis.dskTable
+dnmpdelta -v1 localhost -c public -Cp 10 interfaces.ifTable.ifEntry.iflnOctets.3
+
+LANG=ja_JP.euc_JP mrtg /etc/mrtg/mrtg.cfg
+LANG=ja_JP.encJP mrtg /etc/mrtg/mrtg.cfg
+
+indexmaker /etc/mrtg/mrtg.cfg > /var/www/mrtg/index.html
+
 
 
 
