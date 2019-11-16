@@ -1,0 +1,9 @@
+// /etc/postfix/transport
+postmap /etc/postfix/transport
+
+mail.nscg.jp local:
+sub.nscg.jp smtp:mail.sub.nscg.jp:25
+
+remote.nscg.jp smtp:[192.168.1.8]:25
+
+

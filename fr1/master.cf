@@ -5,6 +5,23 @@ cyrus unix - n n - - pipe
 mailbox_transport = cyrus
 crys_destination_recipient_limit=1
 
+// /etc/postfix/master.cf
+smtp inet n - n - - smtpd
+submission inet n - n - - smptd
+ -o syslog_name=postfix/submission
+ -o smtpd_tls_security_level=encrypt
+ -o smtpd_sasl_auth_enable=yes
+
+// /etc/postfix/master.cf
+smtp inet n - n - n50 smtpd
+
+// /etc/postfix/master.cf
+smtp inet n - n - - smtpd
+
+home_mailbox = Maildir/
+
+relay_domainns= $mydesination, ok.nscg.jp
+
 
 
 

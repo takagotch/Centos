@@ -1,0 +1,4 @@
+// /etc/aliasses
+info: :include:/etc/postfix/list.info
+
+

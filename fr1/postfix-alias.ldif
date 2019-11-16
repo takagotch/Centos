@@ -1,0 +1,15 @@
+dn: uid=user05,ou=People,dc=nscg,dc=jp
+uid: user05
+cn: Test User 05 
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+objectClass: inetLocalmailRecipient
+userPassword: {SSHA}xxx
+loginShell: /bin/bash
+uidNumber: 1005
+gidNumber: 1005
+homeDirectory: /homeuser05
+mailRoutingAddress: user05@centos7g.nscg.jp
+
+

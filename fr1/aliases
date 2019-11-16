@@ -1,0 +1,13 @@
+// /etc/aliases
+mailer-daemon: postmaster
+postmaster: root
+bin: root
+daemon: root
+adm: root
+****
+marketing: postmaster
+sales: postmaster
+support: postmaster
+decode: root
+
+

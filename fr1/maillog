@@ -4,6 +4,10 @@ Dec 7
 // /var/log/maillog(anvil)
 Dec 7 13:57:20 centos7g postfix/smtpd[]: warning: Connection rate limit exceeded: 2 from pc1.nscg.jp[] for service smtp
 
+// /var/log/maillog
+
+// /var/log/maillog
+
 
 
 

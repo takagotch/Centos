@@ -1,0 +1,5 @@
+// /etc/postfix/list.info
+user@server2.nscg.jp
+mail@server3.nscg.jp
+
+

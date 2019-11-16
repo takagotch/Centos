@@ -1,0 +1,6 @@
+// /etc/sysconfig/saslauthd
+SOCKETDIR=/var/run/saslatuthd
+MEXCH=ldap
+FLAGS=
+
+

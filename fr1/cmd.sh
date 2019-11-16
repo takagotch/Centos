@@ -1066,5 +1066,28 @@ sudo chgrp mailman /etc/mailman/adm.pw
 sudo chmod g+w /etc/mailman/adm.pw
 ls -l /etc/mailman/adm.pw
 
+postqueue -p
+
+firewall-cmd --permanent --add-port=submission/tcp
+firewall-cmd --reload
+
+
+telnet 127.0.0.1 smtp
+quit 
+
+saslpasswd2 -u centos7g.nscg.jp admin
+saslblistusers2
+
+chgrp postfix /etc/sasldb2
+
+// /etc/aliases
+postalias /etc/aliases
+
+relayhost = mail.nscg.jp
+
+postmap /etc/postfix/transport
+
+firewall-cmd --permanent --add-service=smtp
+firewall-cmd --reload
 
 

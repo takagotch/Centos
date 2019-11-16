@@ -1,0 +1,11 @@
+// /etc/postfix/ldap-aliases.cf
+server_host = 192.168.10.16:389
+search_base = dc=nscg,dc=jp
+bind = yes
+bind_dn = cn=Admin,dc=nscg,dc = jp
+bind_pw = admin
+version = 3
+query_filter = uid=%s
+result_attribute = mailRoutingAddress
+
+
