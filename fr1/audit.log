@@ -1,0 +1,3 @@
+// /var/log/audit/audit.log
+type=AVC msg=audit(): avc: denied { write } for pid=5921 comm="mrtg" name="/" dev="dm=1" ino=128 scontext=system_u:system_r:system_r:mrtg_t:s0-s0:c0.c1023 tcontext=system_u:object_r:root_t:c0 tclass=dir
+

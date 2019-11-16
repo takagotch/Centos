@@ -5,5 +5,9 @@ bacula-sd: ALL
 
 baclua-dir: ALL
 
+ALL: ALL
+
+ALL: ALL:SPAWN=(/user/sbin/safe_finger -l @%h | /bin/mail -s %d=%h root) &;
+
 
 

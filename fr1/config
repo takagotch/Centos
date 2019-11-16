@@ -1,0 +1,8 @@
+// /etc/selinux/config
+SELINUX=permissive
+SELINUXTYPE=mls
+
+// /etc/selinux/config
+SELINUX=enforcing|permissive|disabled
+
+

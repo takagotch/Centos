@@ -1,0 +1,10 @@
+// /etc/postfix/master.cf
+cyrus unix - n n - - pipe
+  user=cyrus argv=/usr/lib/cyrus-imapd/deliver -e -r $(sender) -m ${extension} ${user}
+
+mailbox_transport = cyrus
+crys_destination_recipient_limit=1
+
+
+
+

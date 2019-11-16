@@ -1,0 +1,4 @@
+// /etc/grub.b/40_custom
+set supersuser="admin"
+password admin adminpass
+

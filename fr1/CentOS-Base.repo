@@ -1,0 +1,35 @@
+// /etc/yjm.repos.d/CentOS-Base.repo
+[base]
+name=CentOS-$releasever - Base
+mirrorList=http://mirrorlist.centos.org/?release=$releasever&arch=$baserch&repo=os
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch/gpgcheck=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=0
+
+#released updates
+[updates]
+name=CentOS-$releasever - Updates
+mirrorlist=http://mirrorlist.centos.org/?release=$releasever&arch=$basesearch&repo=updates
+$baseurl=http://mirror.centos.org/centos/$releasever/updates/$basesearch/gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enabled=0
+#additional packages that may be useful
+[extras]
+name=CentOS-$releasever - Extras
+mirrolist=http://mirrorlist.centos.org/?release=$releasever&arch=$basearch&repo=extra=extras
+$baseurl=http://mirror.centos.org/centos/$releaseserver/extras/$baseserach/gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+enalbed=0
+
+// /etc/yum.repos.d/CentOS-Base.repo
+[base]
+name=CentOS-$releasever - Base
+mirrorlist=http://mirrolist.centos.org/?releasever&arch=$basearch&repo=os
+#baseurl=http://mirror.centos.org/centos/$releasever/os/$basearc/gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+
+
+
+
+

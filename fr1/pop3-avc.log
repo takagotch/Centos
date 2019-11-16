@@ -1,0 +1,4 @@
+type=AVC msg=audit(111.111:111): avc: denied { connectto } for pid=10
+164 comm="pop3d" path="/run/saslautd/mux" scontext=system_u:system_r:cyrus_t:s0tcontext_u:system_r:unconfined_t:s0-s0:c-.c1023 tclass=unix_stream_socket
+
+

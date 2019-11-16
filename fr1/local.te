@@ -1,0 +1,15 @@
+module local 1.0;
+
+require {
+  type client_t;
+  type unconfined_t;
+  class unix_stream_socket connecttol
+  class unix_stream_socket read;
+  class unix_stream_socket write;
+}
+
+allow cryus_t unconfined_t:unix_stream_socket { connectto read write };
+
+
+
+

@@ -777,4 +777,263 @@ firewall-cmd --reload
 firewall-cmd --permanent --add-serice=ttp
 firewall-cmd --reload
 
+firewall-cmd --permanent --direct --get-all-rules
+firewall-cmd --permanent --direct --remove-rule ipv4 filter OUTPUT 3 -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+firewall-cmd --direct --remove-rule ipv4 filter OUTPUT 3 -m state --state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 1 -p icmp -j ACCEPT 
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 2 -m state --state ESTABLISHED,RELATED -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 3 -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 4 -m state --state NEW -m udp -p udp --dport domain -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 5 -m state --state NEW -m tcp -p tcp --dport domain -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 99 -j REJECT 
+firewall-cmd --reload
+
+firewall-cmd --permanent --list-rich-rules
+firewall-cmd --permanent --remove-rich-rule='rule family="ipv4" source address="192.168.3.207" port port="11211" protocol="tcp" accept'
+firewall-cmd --reload
+
+firewall-cmd --permanet --add-rich-rule='rule family=ipv4 source address="192.168.3.207" serivce name=vnc-server accept'
+firewall-cmd --reload
+firewall-cmd --permanent --add-rich-rule='rule family=ipv4 source address="192.168.3.0/24" port port=pop3 protocol=tcp accept'
+firewall-cmd --reload
+
+firewall-cmd --permanent --list-rich-rules
+
+firewall-cmd --permanent --list-forward-ports
+
+firewall-cmd --permanent --remove-forward-port="port=10022:proto=tcp:toaddr=192.168.7.2:toport=22"
+firewall-cmd --reload
+
+firewall-cmd --permanent --add-forwad-port="port=10022:proto=tcp:toaddr=192.168.7.2:toport=22"
+firewall-cmd --reload
+
+firewall-cmd --permanent --list-ports
+
+firewall-cmd --permanent --add-port=5900-5903/tcp
+firewall-cmd --permanent -add-port=pop3/tcp
+firewall-cmd --reload
+
+firewall-cmd --permanent --remove-port=5900-5903
+firewall-cmd --reload
+
+firewall-cmd --permanet --permanent --list-services
+
+firewall-cmd --permanet --remove-service=http
+firewall-cmd --reload
+
+firewall-cmd --reload
+
+firewall-cmd --zone=work --change-interface=enp0s3
+firewall-cmd --get-active-zone
+firewall-cmd --permanent --list-all
+
+firewall-cmd -get-services
+
+firewall-cmd --permanent --add-services=http
+
+firewall-cmd --get-zones
+firewallc-md --get-default-zone
+firewall-cmd --set-default-zone-internal
+firewall-cmd --get-active-zone
+
+firewall-cmd --reload
+systemctl reload firewalld.service
+
+
+ldd /bin/bash
+pwd
+ls 
+echo /*
+setsebool slinuxuser_use_ssh_chroot_on
+
+mkdir -p /home/chroot/home
+mv /home/chroot/home
+mv /home/restuser /home/chroot/home/
+ln -s chroot/home/restuser /home/restuser
+
+mkdir /home/chroot/bin /home/chroot/lib64
+cp -p /bin/bash /home/chroot/bin/
+cp -p /lib64/libinfo.so.5 /lib64/libdl.so.2 /lib64/libc.so.6 /lib64/ld-linux-x86-64.so.2 /home/chroot/lib64
+
+ssh 192.168.2.50
+
+cat id_dsa.pub >> authorized_kes
+chmod 600 authorized_keys
+
+cat id_rsa.pub >> authoried_keys
+chomd 600 authorized_keys
+
+cat identity.pub >> authorized_keys
+chomd 600 authorized_keys
+
+chmod 700 /home/tarou/.ssh
+
+ssh-keygen -t rsa1
+
+ssh-keygen -t dsa
+ssh-keygen -t rsa
+
+firewall-cmd --permanent --add-service=ssh
+firewall-cmd --reload
+
+semodule -r local
+samodule -l
+
+semodule -u local.pp
+semodule -l
+semodule -l
+
+semodule -i local.pp
+
+checkmodule -M -m -o local.mod.to
+semodule.package -o local.pp -m local.mod
+
+audit2allow-M local < /tmp/postfix-avc.log
+
+
+sestatus
+
+fixfiles onboot
+shutdown -r now
+
+usermod -Z staff_u testuser
+useradd -Z user_u_test_user
+semange login -d testuser
+
+semanage login -l
+semanage login -a -a guest_u testuser
+semanage login -l
+
+ssh 192.168.7.3 -l testuser
+ld
+ping 192.168.7.1
+
+semanage module --enable zabbix
+
+semanage login -l
+
+semanage permissive -d sshd_t
+semanage module --disable zabbix
+semanage module -l
+semanage permissive -l
+ps -Z -C sshd
+
+semanage port -l
+semanage port -l | grep -w 22
+semanage port -a -t ssh_port_t -p tcp 9022
+semanage port -l | grep -w ssh_port_t
+
+semanage port -d -t ssh_port_t -p tcp 9022
+semanage port -l | grep -w ssh_port_t
+
+semanage fcontext -l
+
+semanage fcontext -a -t public_context_t "/var/example(/.*)?"
+restorecon -R /var/example
+ls -ldZ /var/example/
+
+semanage fcontext -m -t public_context_rw_t "/var/example(/.*)?"
+restorecon -R /var/example
+ls -ldZ /var/example/
+
+semanage fcontext -d "/var/example(/.*)?"
+restorecon -R /var/example
+ls -ldZ /var/example/
+
+cd /
+start -H=exustar -cvz -f /tmp/log.tar.gz var/log/maillog*
+start -xattr -xvz -f /tmp/log.tar.gz
+
+ls -lZ /etc/passwd
+cp /etc/passwd .
+ls -lZ passwd
+rm -passwd
+cp --preserve=context /etc/passwd .
+ls -lZ passwd
+
+fixfiles onboot
+shutdown -r now
+
+restorecon -v -R /home
+
+sesearch --allow -n -s ftpd_t -t public_context_t
+
+sesearch --allow -b allow_ftpd_anon_write
+
+chcon system_u:object_r:var_log_t:s0 log
+
+seinfo
+
+ls -lZ /etc/passwd
+
+LANG=C man ls
+ps -Z -C rsyslogd
+id -Z
+ls -lZ /etc/passwd
+
+sestatus
+
+setsebool -P ftp_home_dir 1
+getsebool ftp_home dir
+
+getenforce
+
+mkdir /mnt/dvd
+mount -r /dev/dvd /mnt/dvd
+umount /dev/dvd
+
+cd /mnt/dvd/Packages
+yum localinstal squid-3.3.8-11.el7.x86_64.rpm
+
+yum install squid
+
+yum update squid
+
+yum install squid
+yum remove perl-DBI
+yum provides /lib64/libwrap.so.0
+yum plist docecot
+yum info squid
+yum update NetworkManager
+yum list perl*
+yum install squid
+
+rpm -ihv httpd-2.4.6-17.el7.centos.1.x86.64.rpm
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+rpm -qai gpg-pubkey*
+
+yum provides /usr/lib/systemd/system/httpd.service
+yum info httpd
+
+grub2-mkpasswd-pbkdf2
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+admin
+
+ps -aux
+
+firewall-cmd --pemanent --add-service=smtp
+firewall-cmd --reload
+
+firewall-cmd -- permanent --add-serice=smtp
+firewall-cmd --reload
+
+cyradm --user cyrus localhost
+setaclaimbox user.testuser cyrus x
+deletemailbox user.testuser
+quit
+
+passwd cyrus
+cyradm --user cyrus localhost
+createmailbox user.testuser
+quit
+
+chown cyrus:mail /home/imap
+chmod 700 /home/imap
+
+semanage fcontext -a -t mail_spool_t "/home/imap(/.*)?"
+restorecon -R /home/imap
+
+
 

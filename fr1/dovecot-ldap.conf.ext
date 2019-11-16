@@ -1,0 +1,10 @@
+hosts = 127.0.0.1
+dn = cn=Admin,dc=nscg,dc=jp
+nspass = admin
+base = dc=nscg,dc=jp
+user_attrs = homeDirectory=home,uidNumber=uid.gidNumber=gid
+user_filter = (&(objectClass=posixAccount)(uid=%u))
+pass_attrs = uid=user,userPassword=password
+pass_filter = (&(objectClass=posixAccount)(uid=%u))
+
+

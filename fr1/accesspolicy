@@ -1,0 +1,2 @@
+allow ftpd_t public_content_t : file { ioctl read getattr lock };
+allow ftpd_t public_content_t :file write;
