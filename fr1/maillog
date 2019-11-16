@@ -1,5 +1,9 @@
-// /var/log/maillog
-Dec 9 17:20:16 centos7g imap[14538]: login: [2001:db8:1] admin CRAM-MD5+TLS User logged in SESSIONID=<nscg.jp=1111-1>
+// /var/log/maillog(SMTP-AUTH)
+Dec 7 
+
+// /var/log/maillog(anvil)
+Dec 7 13:57:20 centos7g postfix/smtpd[]: warning: Connection rate limit exceeded: 2 from pc1.nscg.jp[] for service smtp
+
 
 
 

@@ -1035,5 +1035,36 @@ chmod 700 /home/imap
 semanage fcontext -a -t mail_spool_t "/home/imap(/.*)?"
 restorecon -R /home/imap
 
+firewall-cmd --permanent --add-service=imaps
+firewall-cmd --permanent -add-service=pop3s
+firewall-cmd --reload
+
+firewall-cmd --permanent --add-port=imap/tcp
+fireall-cmd-permanent --add_port=pop3/tcp
+fireall-cmd --reload
+
+1 CAPABILITY
+
+sudo ./remove_member nscg takagotch@nscg.jp
+
+sudo ./add_members -r - nscg
+takagotch@scg.jp
+
+sudo ./rmlist nscg
+sudo ./newlist
+#listname nscg
+./list_lists
+
+sudo newaliases
+
+cd /usr/lib/mailman/bin
+sudo ./newlist mailman
+
+sudo /usr/lib/mailman/bin/mmsitepass
+ls -l /etc/mailman/adm.pw
+sudo chgrp mailman /etc/mailman/adm.pw
+sudo chmod g+w /etc/mailman/adm.pw
+ls -l /etc/mailman/adm.pw
+
 
 
