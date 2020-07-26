@@ -13,12 +13,15 @@ yum install epel-release
 
 
 ```
+// Settings GUI
 // English keyboard
 // Ctrl + Space
 // 日本語かな漢字
 dnf -y install libkkc libkkc-data ibus-kkc
 //Alt + Ctrl + Delete
 shotdown -r -t 0 // shutdown /r /t 0
+// Ctrl + Alt + t
+// gnome-terminal
 
 
 ```
