@@ -1,4 +1,4 @@
-### centos
+### centos | .rpm 
 ---
 
 http://ftp.riken.jp/Linux/centos/7/isos/x86_64/
@@ -8,6 +8,18 @@ https://github.com/chef/bento
 ```sh
 // centos
 yum install epel-release
+
+```
+
+
+```
+// English keyboard
+// Ctrl + Space
+// 日本語かな漢字
+dnf -y install libkkc libkkc-data ibus-kkc
+//Alt + Ctrl + Delete
+shotdown -r -t 0 // shutdown /r /t 0
+
 
 ```
 
