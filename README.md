@@ -27,6 +27,10 @@ shotdown -r -t 0 // shutdown /r /t 0
 // Ctrl + Alt + t
 // gnome-terminal
 
+// shutdown
+// Ctrl + Alt + T
+shutdown -h now
+
 
 ```
 
