@@ -1,4 +1,4 @@
-###### 自宅サーバー
+###### 自宅サーバー CentOS8
 ---
 https://centossrv.com/
 
