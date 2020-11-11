@@ -6,8 +6,7 @@ https://www.technoveins.co.jp/tvblog/index.php/all-contents/87-connection/46-2-n
 
 ポートフォワーディング(Port Forwarding)を利用して公開する
 
-VPN(Virtual Private Network)を利用して公開す
- [VPN](https://github.com/takagotch/SoftEtherVPN/blob/master/README.md)
+VPN(Virtual Private Network)を利用して公開する [VPN](https://github.com/takagotch/SoftEtherVPN/blob/master/README.md)
 
 
 
