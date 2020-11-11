@@ -2,11 +2,12 @@
 https://www.technoveins.co.jp/tvblog/index.php/all-contents/87-connection/46-2-nat
 
 
-1 
+静的NAT機能を利用して公開する
 
-2
+ポートフォワーディング(Port Forwarding)を利用して公開する
 
-3 VPN https://github.com/takagotch/SoftEtherVPN/blob/master/README.md
+VPN(Virtual Private Network)を利用して公開す
+ [VPN](https://github.com/takagotch/SoftEtherVPN/blob/master/README.md)
 
 
 
