@@ -1,4 +1,6 @@
-###### 外部 自宅pc アクセス https://gist.github.com/Buravo46/de3ebc642082dcd9f8cd
+###### 外部 自宅pc アクセス 
+https://www.technoveins.co.jp/tvblog/index.php/all-contents/87-connection/46-2-nat
+
 ###### 自宅サーバー　初期設定
 ---
 
