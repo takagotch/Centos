@@ -1,6 +1,5 @@
-###### 外部 自宅pc アクセス 
+###### 自宅に設置したサーバを公開する方法
 https://www.technoveins.co.jp/tvblog/index.php/all-contents/87-connection/46-2-nat
-
 
 静的NAT機能を利用して公開する
 
