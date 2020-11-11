@@ -1,6 +1,15 @@
 ###### 外部 自宅pc アクセス 
 https://www.technoveins.co.jp/tvblog/index.php/all-contents/87-connection/46-2-nat
 
+
+1 
+
+2
+
+3 VPN https://github.com/takagotch/SoftEtherVPN/blob/master/README.md
+
+
+
 ###### 自宅サーバー　初期設定
 ---
 
