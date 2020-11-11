@@ -1,4 +1,4 @@
-###### 外部 自宅pc アクセスhttps://gist.github.com/Buravo46/de3ebc642082dcd9f8cd
+###### 外部 自宅pc アクセス https://gist.github.com/Buravo46/de3ebc642082dcd9f8cd
 ###### 自宅サーバー　初期設定
 ---
 
