@@ -1,5 +1,6 @@
 ###### centos | .rpm ,yum,dnf,epel
-### sshでつなげるところまで
+### VPN 自宅サーバー　[海外から安全に接続出来る自宅VPNサーバーの立上げ方法
+、sshでつなげるところまで](https://github.com/takagotch/VPN/blob/master/README.md)
 ---
 
 http://ftp.riken.jp/Linux/centos/7/isos/x86_64/
