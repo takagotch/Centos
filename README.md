@@ -7,7 +7,7 @@ https://one-it-thing.com/5982/
 https://www.google.com/search?sxsrf=ALeKk00L5ZP-dBIjGif-HzxhBALoJ7Suyg%3A1605226693107&ei=xdCtX4D0BfOSr7wP67CtuAo&q=softether+vpn+centos8&oq=SoftEther+VPN+ceont&gs_lcp=CgZwc3ktYWIQAxgCMgQIABANMgQIABANMgQIABANMgYIABANEB4yCAgAEAgQDRAeMggIABAIEA0QHjIICAAQCBANEB4yCAgAEAgQDRAeOgQIABBHOgQIABBDOgIIADoFCAAQsQM6BAgAEAQ6BQgAEM0CUK8GWNkUYPsiaABwAngAgAHTAYgBkgaSAQUxLjQuMZgBAKABAaoBB2d3cy13aXrIAQXAAQE&sclient=psy-ab
 
 ---
-
+---
 
 
 http://ftp.riken.jp/Linux/centos/7/isos/x86_64/
