@@ -55,7 +55,38 @@ chmod +x /etc/cron.daily/vpnserver
 ```
 
 ```
+vi UserPasswordSet.txt
+user2 /GROP:none /REALNAME:none /NOTE:none
+user3 /GROUP:none /REALNAME:none /NOTE:none
+user2 /PASSWORD:user2password
+user3 /PASSWORD:user3password
+
+/usr/local/vpnserver/vpncmd /server localhost:5555 /in:UserPasswordSet.txt
+pass
 ```
 
+```
+nmcli device
+nmcli c add type bridge ifname br0
+nmcli con modify bridge-br0 bridge.stp no 
+nmcli con modify bridge-br0 ipv4.method manual ipv4.addresses 192.168.1.1 ipv4.dns "8.8.8.8.8.8.4.4"
+nmcli con add type bridge-slave ifname eth0 master bridge-br0
+nmcli c del eth0
+reboot
+brctl show
+ip addr show
+
+
+```
+
+```
+nmcli device
+vi /etc/systemd/system/vpnserver.service
+systemctl daemon-reload
+vi /usr/local/vpnserver/add_tap.sh
+```
+
+```
+```
 
 
