@@ -28,13 +28,30 @@ chmod 700 vpnserver
 check
 exit
 cd
-rm -f 
-
-
-
+rm -f softether-vpnserver-v4.34-9745-rtm-2020.04.05-linux-x64-64bit.tar.gz
 ```
 
 ```
+vi /etc/systemd/vpnserver.service
+systemctl start vpnserver
+systemctl enable vpnserver
+// ONU直差し
+// ONU + router
+// router
+// UDP 500port, UDP4500port
+// firewall
+// UDP 500port, UDP4500port
+// http://tt0.link/tool/portcheck/
+
+systemctl stop vpnserver
+vi /usr/local/vpnserver/vpn_server.config
+ // bool Enabled false
+ // bool Enabled false
+ // bool Enabled false
+systemctl start vpnserver
+vi /etc/cron.daily/vpnserver
+chmod +x /etc/cron.daily/vpnserver
+
 ```
 
 ```
