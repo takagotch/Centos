@@ -1,3 +1,10 @@
+### 
+
+### 
+
+
+---
+
 ###### 自宅に設置したサーバを公開する方法
 https://www.technoveins.co.jp/tvblog/index.php/all-contents/87-connection/46-2-nat
 
