@@ -1,5 +1,5 @@
-### (OpenVPN.md)[https://github.com/takagotch/Centos/blob/master/_post/OpenVPN.md]
-### [SoftEtherVPN]()
+
+### [SoftEtherVPN](https://github.com/takagotch/Centos/blob/master/_post/SoftEtherVPN.md)
 
 ### [OpenVPN](https://github.com/takagotch/Centos/blob/master/_post/OpenVPN.md)
 
